@@ -153,6 +153,9 @@ def transcribeVoice():
     if request.method == 'POST':
         return jsonify({'result': whisperModel.transcribe(os.path.join(app.config['UPLOAD_FOLDER'], uploadFile()))['text']})
 
+@app.route('/api/ping', methods=['GET'])
+def ping():
+    return jsonify({'result': 0})
 
 if __name__ == '__main__':
     # Argument parsing #################################################################
@@ -188,4 +191,4 @@ if __name__ == '__main__':
             row[0] for row in point_history_classifier_labels
         ]
 
-    app.run()
+    app.run(port=5000, host='0.0.0.0')
